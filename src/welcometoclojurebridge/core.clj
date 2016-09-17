@@ -1,14 +1,17 @@
 (ns welcometoclojurebridge.core
   (:require [quil.core :as q]
-            [quil.middleware :as m]))
+            [quil.middleware :as m]
+            [clojurebridge-turtle.walk]))
 
 (def angle-speed 0.05)
 (def color-speed 0.15)
 
+
 (defn setup []
-  (q/frame-rate 30)
+  (q/frame-rate 1)
   (q/color-mode :hsb)
   (q/text-font (q/create-font "resources/SourceCodePro-Regular.ttf" 36 true))
+  (q/background 0)                    ;; Turn on anti-aliasing
 
   {:logo (q/load-image "logo.png")
    :background (q/load-image "background.png")
@@ -34,13 +37,22 @@
                          (/ (q/height) 2)]
       (q/image (:logo state) (- x 60) (- y 60) 120 120))))
 
+(def angles
+   {
+     :trinity 45
+     :neo 90
+    :oracle 120
+    :cypher 60})
+
+
+
 (q/defsketch welcometoclojurebridge
   :title "Welcome To ClojureBridge!"
-  :size [650 500]
+  :size :fullscreen 
   :setup setup
   :update update-state
   :draw draw-state
-  :features [:keep-on-top]
+  :features [:keep-on-top :present]
   :middleware [m/fun-mode])
 
 ;;

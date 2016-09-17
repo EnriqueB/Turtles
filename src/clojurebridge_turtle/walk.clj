@@ -13,7 +13,7 @@
 ;;
 ;; Alternatively, you may type code in this editor. To evaluate:
 ;; - pieces of code: select code fragment and Reload Selection
-;; - whole file: click Reload File
+;; - whole file: click Reload Fil
 ;;
 ;; [Exercise]
 ;; write some functions under these comment lines
@@ -27,3 +27,32 @@
 ;;
 ;; see how the turtle walks
 ;;
+
+
+(forward 10)
+
+#_(defn parse-commands [state]
+  (println "hello")
+   (let [ empty-commands (empty? (:commands state))
+          plus (= (str(first (:commands state)) "+"))
+          minus (= (str(first (:commands state)) "-"))
+          ;_ (println (str "conditions: " \newline))
+          ;_ (clojure.pprint/pprint {:commands commands
+          ;                          :empty-commands empty-commands
+          ;                          :plus plus
+          ;                          :minus minus
+          ;                          :turtles (turtle-names)})
+         _ (cond
+              empty-commands nil
+              plus (doseq [n (turtle-names)] (right n (n angles)))
+              minus (doseq [n (turtle-names)] (left n (n angles)))
+              :else (doseq [n (turtle-names)] (forward n 5)) )]))
+
+
+;(defn parse-commands [commands angle]
+;(cond
+;(empty? commands) ()
+;(= (str(first commands)) "+") ((right :neo 90) (parse-commands (rest commands) 20))
+;(= (str(first commands)) "-") ((left :neo 90) (parse-commands (rest commands) 20))
+;:else ((forward :neo 15) (parse-commands (rest commands) 20))
+
